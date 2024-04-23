@@ -4,6 +4,8 @@ const router  = Router()
 
 router.get('/', function(req, res){
 
-    render('notes/create')
+    res.render('notes/create')
 
 })
+
+module.exports = router

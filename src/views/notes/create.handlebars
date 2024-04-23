@@ -1,0 +1,17 @@
+<a href="/">Voltar</a>
+<h2>Adicione uma nota:</h2>
+
+<form action="/notes" method="POST">
+
+    <div class="mb-3">
+        <label for="title" class="form-label">Título:</label>
+        <input type="text" name="title" id="title" class="form-control" placeholder="O que você pretende fazer?">
+
+        <label for="description" class="form-label">Descrição:</label>
+        <textarea id="description" name="description" class="form-control" placeholder="Descreva melhor sua nota..."></textarea>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Criar nota</button>
+
+</form>
