@@ -1,11 +1,15 @@
 @charset "UTF-8";
 
-html, body{
+:root{
+    --color-background-light: #f3f3f3; 
+}
 
+html, body{
+    height: 100vh;
 }
 
 body{
-    background-color: #f3f3f3;
+    background-color: var(--color-background-light);
 }
 
 button:focus:focus-visible{
@@ -30,8 +34,8 @@ main#main-container{
 
 footer{
     height: 35px;
-    position: absolute;
     width: 100%;
+    position: fixed;
     bottom: 0;
     color: #fff;
     text-align: center;
@@ -44,3 +48,84 @@ footer > p{
     padding: 0;
     margin: 0;
 }
+
+
+/* Configuraçoes da view de notas feitas pelo user */
+
+main#mainViewNotes{
+    width: calc(97% - 10px);
+    margin: auto;
+    margin-top: 30px;
+}
+
+/* article#articleViewNotes{
+    margin: auto;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 25px;
+    max-height: 200px;
+} */
+
+.table>:not(caption)>*>* {
+    background-color: var(--color-background-light);
+}
+
+table > thead{
+    border-bottom: 2px solid #212529a9;
+}
+
+table > tbody > tr{
+    padding: 20px;
+}
+
+tr > th{
+    text-align: center;
+}
+
+.title-column{
+    width: 100%;
+    text-align: center;
+}
+
+th, td{
+    line-height: 2em;
+}
+
+.title-column a{
+    text-decoration: none;
+    color: #212529;
+}
+
+.title-column a:hover{
+    text-decoration: underline;
+}
+
+.actions-column{
+    display: flex;
+    gap: 15px;
+}
+/* .edit{
+    color: #fff; 
+    padding: 4px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3e3eff;
+    border-radius: 7px;
+}
+
+.edit:hover{
+    background-color: #3030c4;
+} 
+
+.btn-danger{
+    padding: 4px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+

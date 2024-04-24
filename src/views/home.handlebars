@@ -1,1 +1,42 @@
-<h1>Renderizando a View desse cachorro</h1>
+<h1>Suas notas:</h1>
+
+<main id="mainViewNotes">
+
+    <table id="myTable" class="table">
+        {{#each notes}}
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titulo: </th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            
+            <tr>
+                <th scope="row">{{@index}}</th>
+                <td class="title-column">
+
+                    <a href="notes/{{ this._id }}">
+                        {{this.title}}
+                    </a>
+
+                </td>
+                <td class="actions-column">
+                    <a href="notes/edit/{{ this._id}}" class="btn btn-primary">Editar</a>
+                    <form action="notes/delete" method="POST">
+                        <input type="hidden" name="id" value="{{ this._id}}">
+                        <input type="submit" class="btn btn-danger" value="Remover">
+                    </form>
+                </td>
+            </tr>
+            {{ else}}
+
+                <p>Não Há notas no sitema ainda, <a href="notes">Clique aqui</a> para adicionar.</p>
+
+            {{/each}}
+
+        </tbody>
+    </table>
+</main>
