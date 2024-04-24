@@ -6,6 +6,15 @@ const bodyparser = require('body-parser')
 const app = express()
 const port = 8000
 
+// DB 
+const db = require('./db/connection')
+
+// template engine
+app.engine('handlebars', exphbs.engine())
+app.set('view engine', 'handlebars')
+app.use(express.static('public'))
+app.use(bodyparser.urlencoded({ extended: true }))
+
 // Importação de rotas
 const notesRoutes = require('./routes/notes')
 
@@ -16,14 +25,17 @@ app.get('/', function(req, res) {
 
 app.use('/notes', notesRoutes)
 
-// template engine
-app.engine('handlebars', exphbs.engine())
-app.set('view engine', 'handlebars')
-app.use(express.static('public'))
+db.initDb((error, db) => {
 
+    if(error){
+        console.log(error);
+    }else{
 
-app.listen(port, () => {
+        console.log('Banco conectado :)');
+        app.listen(port, () => {
+            console.log(`Projeto rodadndo na porta ${port}`);
+        })
 
-    console.log(`Projeto Rodando na porta ${port}`);
+    }
 
 })
