@@ -3,7 +3,7 @@
 <main id="mainViewNotes">
 
     <table id="myTable" class="table">
-        {{#each notes}}
+        
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -13,7 +13,7 @@
         </thead>
         <tbody>
 
-            
+            {{#each notes}}
             <tr>
                 <th scope="row">{{@index}}</th>
                 <td class="title-column">
@@ -31,7 +31,7 @@
                     </form>
                 </td>
             </tr>
-            {{ else}}
+            {{ else }}
 
                 <p>Não Há notas no sitema ainda, <a href="notes">Clique aqui</a> para adicionar.</p>
 

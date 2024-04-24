@@ -90,7 +90,7 @@ tr > th{
 }
 
 th, td{
-    line-height: 2em;
+    line-height: 3em;
 }
 
 .title-column a{
@@ -106,26 +106,19 @@ th, td{
     display: flex;
     gap: 15px;
 }
-/* .edit{
-    color: #fff; 
-    padding: 4px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #3e3eff;
-    border-radius: 7px;
+
+#mainViewNotes a.btn {
+    height: 40px;
+    margin-top: 6px;
 }
 
-.edit:hover{
-    background-color: #3030c4;
-} 
+@media (600px > width){
+    #mainViewNotes td{
+        height: 70px;
+    }
 
-.btn-danger{
-    padding: 4px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
+    #mainViewNotes .btn{
+        height: 40px;
+    }
+}
 
