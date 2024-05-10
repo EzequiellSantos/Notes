@@ -47,3 +47,5 @@ db.initDb((error, db) => {
     }
 
 })
+
+module.exports = app;
