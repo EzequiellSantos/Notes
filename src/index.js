@@ -11,7 +11,9 @@ const port = 8000
 const db = require('./db/connection')
 
 // template engine
-app.engine('handlebars', exphbs.engine())
+app.engine('handlebars', exphbs.engine({
+    defaultLayout:'main'
+}))
 app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'))
 app.use(bodyparser.urlencoded({ extended: true }))
