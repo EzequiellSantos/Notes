@@ -13,7 +13,7 @@ const db = require('./db/connection')
 // template engine
 app.engine('handlebars', exphbs.engine())
 app.set('view engine', 'handlebars')
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 app.use(bodyparser.urlencoded({ extended: true }))
 
 // Importação de rotas
