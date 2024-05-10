@@ -36,10 +36,10 @@ db.initDb((error, db) => {
 
     if(error){
         console.log(error);
+        console.log('^^^^^ error na incialização ^^^^')
     }else{
 
         console.log('Banco conectado :)');
-        console.log(`Nossa variavel de ambiente: ${process.env.MY_VARIABLE}`);
         app.listen(port, () => {
             console.log(`Projeto rodadndo na porta ${port}`);
         })
