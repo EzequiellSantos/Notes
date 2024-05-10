@@ -1,4 +1,5 @@
 // configurações
+require('dotenv').config()
 const express = require('express');
 const exphbs = require ('express-handlebars');
 const bodyparser = require('body-parser')
@@ -36,6 +37,7 @@ db.initDb((error, db) => {
     }else{
 
         console.log('Banco conectado :)');
+        console.log(`Nossa variavel de ambiente: ${process.env.MY_VARIABLE}`);
         app.listen(port, () => {
             console.log(`Projeto rodadndo na porta ${port}`);
         })
