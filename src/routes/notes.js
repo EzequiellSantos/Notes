@@ -2,7 +2,7 @@ const Router = require('express').Router
 const db = require('../db/connection')
 const { ObjectId} = require('mongodb')
 
-const router  = Router()
+const router = Router()
 
 // view de detalhes
 router.get('/:id', async function(req, res){
