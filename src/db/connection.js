@@ -11,7 +11,7 @@ let _db
 const initDb = cb => {
 
 
-    MongoClient.connect(url)
+    MongoClient.connect(url, { serverSelectionTimeoutMS: 5000 })
     .then(client => {
         _db = client
         cb(null, _db)
