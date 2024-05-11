@@ -4,6 +4,20 @@ const { ObjectId} = require('mongodb')
 
 const router = Router()
 
+// Em cada rota, primeiro verifique se _db está pronto antes de usá-lo
+router.get('/', async function(req, res) {
+
+    const _db = db.getDb();
+    if (!_db) {
+        res.status(500).send('Erro interno do servidor');
+        return;
+    }
+
+    const notes = await _db.db().collection('notes').find({}).toArray();
+    res.render('home', { notes });
+    
+});
+
 // view de detalhes
 router.get('/:id', async function(req, res){
 
@@ -24,6 +38,7 @@ router.get('/', function(req, res){
 
 // envio de dados para inserção no banco
 router.post('/', function(req, res){
+
     const data = req.body
     const title = data.title
     const description = data.description

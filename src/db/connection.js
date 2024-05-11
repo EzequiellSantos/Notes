@@ -5,18 +5,18 @@ const DB_PASS = process.env.DB_PASS
 
 const url = `mongodb+srv://Ezequiel:${DB_PASS}@cluster0.sv2qh74.mongodb.net/notesDb?retryWrites=true&w=majority&appName=Cluster0`
 
-/** @type {?MongoClient} */
+// @type {?MongoClient} 
 let _db
 
 const initDb = cb => {
 
 
-    MongoClient.connect(url, { serverSelectionTimeoutMS: 5000 })
-    .then(client => {
+    MongoClient.connect(url, { serverSelectionTimeoutMS: 10000 })
+    .then((client) => {
         _db = client
         cb(null, _db)
     })
-    .catch(error  => {
+    .catch((error) => {
         cb(error)
     })
 
