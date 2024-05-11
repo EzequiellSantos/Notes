@@ -4,8 +4,8 @@ const { ObjectId} = require('mongodb')
 
 const router = Router()
 
-// Em cada rota, primeiro verifique se _db está pronto antes de usá-lo
-router.get('/', async function(req, res) {
+// view de detalhes
+router.get('/:id', async function(req, res){
 
     const _db = db.getDb();
     if (!_db) {
@@ -13,13 +13,6 @@ router.get('/', async function(req, res) {
         return;
     }
 
-    const notes = await _db.db().collection('notes').find({}).toArray();
-    res.render('home', { notes });
-    
-});
-
-// view de detalhes
-router.get('/:id', async function(req, res){
 
     const id = new ObjectId(req.params.id)
 
@@ -32,12 +25,26 @@ router.get('/:id', async function(req, res){
 //  criação de rota
 router.get('/', function(req, res){
 
+    const _db = db.getDb();
+    if (!_db) {
+        res.status(500).send('Erro interno do servidor');
+        return;
+    }
+
+
     res.render('notes/create')
 
 })
 
 // envio de dados para inserção no banco
 router.post('/', function(req, res){
+
+    const _db = db.getDb();
+    if (!_db) {
+        res.status(500).send('Erro interno do servidor');
+        return;
+    }
+
 
     const data = req.body
     const title = data.title
@@ -54,6 +61,13 @@ router.post('/', function(req, res){
 
 router.get('/edit/:id', async function(req, res){
 
+    const _db = db.getDb();
+    if (!_db) {
+        res.status(500).send('Erro interno do servidor');
+        return;
+    }
+
+
     const id = new ObjectId(req.params.id)
     const note = await db.getDb().db().collection('notes').findOne({ _id: id})
 
@@ -63,6 +77,13 @@ router.get('/edit/:id', async function(req, res){
 
 //edição de notas
 router.post('/update',function(req, res){
+
+    const _db = db.getDb();
+    if (!_db) {
+        res.status(500).send('Erro interno do servidor');
+        return;
+    }
+
 
     const data = req.body
     const id = new ObjectId(data.id)
@@ -81,6 +102,13 @@ router.post('/update',function(req, res){
 
 //remoção da tarefa
 router.post('/delete', function(req, res){
+
+    const _db = db.getDb();
+    if (!_db) {
+        res.status(500).send('Erro interno do servidor');
+        return;
+    }
+
 
     const data = req.body
     const id = new ObjectId(data.id)
