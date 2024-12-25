@@ -1,6 +1,6 @@
 const Router = require('express').Router
 const db = require('../db/connection')
-const { ObjectId} = require('mongodb')
+const { ObjectId } = require('mongodb')
 
 const router = Router()
 

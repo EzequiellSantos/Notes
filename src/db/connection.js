@@ -16,15 +16,15 @@ const initDb = (cb) => {
   }
 
   MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((client) => {
-      _db = client.db("notesDb"); // Especifica o banco de dados
-      console.log("Conexão com o banco de dados estabelecida.");
-      cb(null, _db);
-    })
-    .catch((error) => {
-      console.error("Erro ao conectar ao banco de dados:", error);
-      cb(error);
-    });
+  .then((client) => {
+    _db = client.db("notesDb"); // Especifica o banco de dados
+    console.log("Conexão com o banco de dados estabelecida.");
+    cb(null, _db);
+  })
+  .catch((error) => {
+    console.error("Erro ao conectar ao banco de dados:", error);
+    cb(error);
+  });
 };
 
 const getDb = () => {
