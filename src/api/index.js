@@ -6,7 +6,7 @@ const bodyparser = require('body-parser');
 const path = require("path");
 
 const app = express()
-const port = 8000
+const port = process.env.PORT || 8000;  
 
 // DB 
 const db = require('../db/connection')
@@ -24,9 +24,16 @@ const notesRoutes = require('../routes/notes')
 // rotas
 app.get('/', async function(req, res) {
 
-    const notes = await db.getDb().db().collection('notes').find({}).toArray()
+    try {
+        const notes = await db.getDb().collection('notes').find({}).toArray()
 
-    res.render('home', { notes })
+        res.render('home', { notes })
+    } catch (error) {
+        console.error("Erro ao buscar notas:", error);
+        res.status(500).send("Erro interno do servidor");
+    }
+
+    
 
 })
 
