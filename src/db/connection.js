@@ -4,7 +4,7 @@ require("dotenv").config();
 const DB_USER = process.env.DB_USER;
 const DB_PASS = process.env.DB_PASS;
 
-const url = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.sv2qh74.mongodb.net/notesDb?retryWrites=true&w=majority`;
+const url = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.sv2qh74.mongodb.net/notesDb?retryWrites=true&w=majoritytls=true`;
 
 // @type {?MongoClient}
 let _db;
@@ -15,7 +15,13 @@ const initDb = (cb) => {
     return cb(null, _db);
   }
 
-  MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  MongoClient.connect(url, { useNewUrlParser: true,
+    useUnifiedTopology: true,
+    tls: true, // Força uso de TLS
+    tlsInsecure: false, // Garante validação de certificados
+    connectTimeoutMS: 30000, // Aumenta o tempo limite
+    socketTimeoutMS: 45000, // Tempo limite para sockets 
+    })
   .then((client) => {
     _db = client.db("notesDb"); // Especifica o banco de dados
     console.log("Conexão com o banco de dados estabelecida.");
