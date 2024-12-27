@@ -12,6 +12,7 @@ const port = process.env.PORT || 8000;
 app.engine('handlebars', exphbs.engine())
 app.set('view engine', 'handlebars')
 app.use(express.static("public"))
+app.set('views', path.join(__dirname, '..' ,'views'));
 app.use(bodyparser.urlencoded({ extended: true }))
 
 // Importação de rotas
