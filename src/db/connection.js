@@ -2,10 +2,7 @@ const { MongoClient } = require("mongodb");
 const app = require('../db/connection')
 require("dotenv").config();
 
-const DB_USER = process.env.DB_USER;
-const DB_PASS = process.env.DB_PASS;
-
-const url = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.sv2qh74.mongodb.net/notesDb?retryWrites=true&w=majoritytls=true`;
+const url = process.env.MONGODB_URI;
 
 // @type {?MongoClient}
 let _db;
