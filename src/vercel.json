@@ -3,22 +3,14 @@
     "name": "Notes",
     "builds": [
       {
-        "src": "index.js",
+        "src": "api/index.js",
         "use": "@vercel/node"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/",
-        "methods": [
-                "GET",
-                "POST",
-                "PUT",
-                "PATCH",
-                "DELETE",
-                "OPTIONS"
-            ]
+        "dest": "api/index.js"
       }
     ]
   }
