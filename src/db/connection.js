@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+const app = require('../db/connection')
 require("dotenv").config();
 
 const DB_USER = process.env.DB_USER;
