@@ -6,17 +6,19 @@ const bodyparser = require('body-parser');
 const path = require("path");
 
 const app = express()
-const port = process.env.PORT || 8000; 
-// Importação de rotas
-const notesRoutes = require('../routes/notes')
-// DB 
-const db = require('../db/connection'); 
+const port = process.env.PORT || 8000;  
 
 // template engine
 app.engine('handlebars', exphbs.engine())
 app.set('view engine', 'handlebars')
 app.use(express.static("public"))
 app.use(bodyparser.urlencoded({ extended: true }))
+
+// Importação de rotas
+const notesRoutes = require('../routes/notes')
+
+// DB 
+const db = require('../db/connection');
 
 // rotas
 app.get('/', async function(req, res) {
