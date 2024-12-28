@@ -23,7 +23,7 @@ router.get('/:id', async function(req, res){
 })
 
 //  criação de rota
-router.get('/', function(req, res){
+router.get('/', async function(req, res){
 
     const _db = db.getDb();
     if (!_db) {

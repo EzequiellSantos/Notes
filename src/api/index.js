@@ -49,4 +49,8 @@ db.initDb((err) => {
     }
 });
 
+app.get('/test', (req, res) => {
+    res.send('Rota de teste funcionando!');
+});
+
 module.exports = app;
