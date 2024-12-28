@@ -51,7 +51,6 @@ router.post('/', function(req, res){
     const description = data.description
 
     db.getDb()
-        .db()
         .collection('notes')
         .insertOne({ title: title, description: description})
     res.redirect(301, '/')
@@ -91,7 +90,6 @@ router.post('/update',function(req, res){
     const description = data.description
 
     db.getDb()
-        .db()
         .collection('notes')
         .updateOne({_id: id}, {$set: {title: title, description: description }})
 
@@ -114,7 +112,6 @@ router.post('/delete', function(req, res){
     const id = new ObjectId(data.id)
 
     db.getDb()
-        .db()
         .collection('notes')
         .deleteOne({_id: id})
     res.redirect(301, '/')

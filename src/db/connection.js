@@ -7,16 +7,14 @@ const url = process.env.MONGODB_URI;
 // @type {?MongoClient}
 let _db;
 
-const initDb = (cb) => {
+const initDb = async (cb) => {
   if (_db) {
     console.log("Banco de dados já inicializado.");
     return cb(null, _db);
   }
 
-  MongoClient.connect(url, { useNewUrlParser: true,
+  await MongoClient.connect(url, { useNewUrlParser: true,
     useUnifiedTopology: true,
-    tls: true, // Força uso de TLS
-    tlsInsecure: false, // Garante validação de certificados
     connectTimeoutMS: 30000, // Aumenta o tempo limite
     socketTimeoutMS: 45000, // Tempo limite para sockets 
     })
