@@ -1,5 +1,5 @@
 # Notes
- [Acesse o site](https://notesall.vercel.app/) para anotações básicas. Utilize a vontade (todos irão ver suas notas), deixe um recado agradável para outros visitantes "-"
+ [Acesse o site](https://all-nottes.vercel.app/) para anotações básicas. Utilize a vontade (todos irão ver suas notas), deixe um recado agradável para outros visitantes "-"
 
  O projeto tem como base de desenvolvimento, a prática com hospedagem na vercel e as ações de CRUD em um banco de dados.
 
