@@ -13,11 +13,7 @@ const initDb = async (cb) => {
     return cb(null, _db);
   }
 
-  await MongoClient.connect(url, { useNewUrlParser: true,
-    useUnifiedTopology: true,
-    connectTimeoutMS: 30000, // Aumenta o tempo limite
-    socketTimeoutMS: 45000, // Tempo limite para sockets 
-    })
+  await MongoClient.connect(url)
   .then((client) => {
     _db = client.db("notesDb"); // Especifica o banco de dados
     console.log("Conexão com o banco de dados estabelecida.");
