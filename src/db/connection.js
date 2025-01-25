@@ -53,7 +53,7 @@ const restartDbConnection = async () => {
 };
 
 // Intervalo de 10 minutos (600000 ms) para reiniciar a conexão
-setInterval(restartDbConnection, 600000); // 600000 ms = 10 minutos
+setInterval(restartDbConnection, 300000); // 600000 ms = 10 minutos
 
 module.exports = {
   initDb,
