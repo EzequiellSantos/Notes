@@ -94,7 +94,7 @@ router.post('/update',function(req, res){
         .updateOne({_id: id}, {$set: {title: title, description: description }})
 
 
-/*     res.redirect(301, '/') */
+    res.redirect(301, '/')
 
 })
 
