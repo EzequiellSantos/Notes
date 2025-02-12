@@ -10,6 +10,7 @@ html, body{
 
 body{
     background-color: var(--color-background-light);
+    margin-bottom:100px;
 }
 
 button:focus:focus-visible{
@@ -30,6 +31,7 @@ main#main-container{
 
 .form-label{
     margin-top: 20px;
+    margin-bottom:20px;
 }
 
 footer{
