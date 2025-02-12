@@ -27,6 +27,7 @@ main#main-container{
     width: calc(100% - 30px);
     max-width: 550px;
     min-height: 375px;
+    margin-bottom:100px;
 }
 
 .form-label{
@@ -58,6 +59,7 @@ main#mainViewNotes{
     width: calc(97% - 10px);
     margin: auto;
     margin-top: 30px;
+    margin-bottom:100px;
 }
 
 /* article#articleViewNotes{
