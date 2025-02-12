@@ -1,33 +1,26 @@
-// configurações
-require('dotenv').config();
 const express = require('express');
 const exphbs = require('express-handlebars');
-const bodyparser = require('body-parser');
 const path = require('path');
+const db = require('./db/connection');
 
 const app = express();
 const port = process.env.PORT || 8000;
 
-// template engine
+// Configuração do Handlebars
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
-app.use(express.static("public"));
-app.set('views', path.join(__dirname, '..', 'views'));
-app.use(bodyparser.urlencoded({ extended: true }));
+app.set('views', path.join(__dirname, 'views'));
 
-// Importação de rotas
-const notesRoutes = require('../routes/notes');
+// Middleware para arquivos estáticos
+app.use(express.static('public'));
 
-// DB 
-const db = require('../db/connection');
-
-// Inicializa o banco e somente depois registra as rotas e inicia o servidor
+// Inicializa o banco de dados e registra as rotas
 (async () => {
   try {
     await db.initDb();
     console.log("Banco conectado com sucesso.");
 
-    // Registra as rotas somente após o banco ser inicializado
+    // Rota principal
     app.get('/', async (req, res) => {
       try {
         const notes = await db.getDb().collection('notes').find({}).toArray();
@@ -38,26 +31,17 @@ const db = require('../db/connection');
       }
     });
 
-    app.use('/notes', notesRoutes);
-
-    // Tratamento de erros global
-    app.use((err, req, res, next) => {
-      console.error("Erro global:", err);
-      res.status(500).send("Erro interno do servidor");
+    // Rota de teste
+    app.get('/test', (req, res) => {
+      res.send('Rota de teste funcionando!');
     });
 
-    // Inicia o servidor após a conexão com o banco
+    // Inicia o servidor
     app.listen(port, () => {
       console.log(`Servidor rodando na porta ${port}`);
     });
   } catch (error) {
     console.error("Erro ao inicializar o banco de dados:", error);
-    process.exit(1); // Encerra o processo em caso de erro
+    process.exit(1);
   }
 })();
-
-app.get('/test', (req, res) => {
-  res.send('Rota de teste funcionando!');
-});
-
-module.exports = app;
