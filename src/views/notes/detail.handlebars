@@ -1,27 +1,18 @@
 <a href="/">Voltar</a>
-<h2>Visualizar nota: {{note.title}}</h2>
+<h2>Editar nota {{note.title}}:</h2>
 
 <form action="/notes/update" method="POST" id="edit-note-form">
 
     <input type="hidden" name="id" value="{{note._id}}">
     <div class="mb-3">
         <label for="title" class="form-label">Título:</label>
-        <input type="text" name="title" id="title" class="form-control" placeholder="O que você pretende fazer?" value="{{note.title}}" readonly>
+        <input type="text" name="title" id="title" class="form-control" placeholder="O que você pretende fazer?" value="{{note.title}}">
 
         <label for="description" class="form-label">Descrição:</label>
-        <textarea id="description" style="min-height: 46vh;" class="form-control" name="description" placeholder="Descreva melhor sua nota...">{{note.description}}</textarea>
+        <textarea id="description" style="min-height: 46vh;" name="description" class="form-control" placeholder="Descreva melhor sua nota...">{{note.description}}</textarea>
 
     </div>
 
+    <button type="submit" class="btn btn-primary">Editar nota</button>
+
 </form>
-
-<script>
-    // Obtendo o textarea e o formulário
-    const description = document.getElementById('description');
-    const form = document.getElementById('edit-note-form');
-
-    // Função para submeter o formulário quando o textarea for alterado
-    description.addEventListener('input', function() {
-        form.submit(); // Envia o formulário automaticamente
-    });
-</script>
