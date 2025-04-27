@@ -4,6 +4,22 @@ const Note = require('../models/notes'); // Importa o modelo Note
 const router = Router();
 
 // Rota para obter detalhes de uma nota
+router.get('/notes', async (req, res) => {
+    try {
+      const note = await Note.find({});
+  
+      if (!note) {
+        return res.status(404).json({ error: 'Sem notas registradas' });
+      }
+  
+      res.json(note);
+    } catch (error) {
+      console.error('Erro ao buscar nota:', error);
+      res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+  });
+
+// Rota para obter detalhes de uma nota
 router.get('/:id', async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
