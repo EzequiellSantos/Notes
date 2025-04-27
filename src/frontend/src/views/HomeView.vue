@@ -52,7 +52,7 @@ export default {
   methods: {
     async fetchNotes() {
       try {
-        const response = await fetch(`${this.apiURL}/notes`);
+        const response = await fetch(`${this.apiURL}/`);
         if (response.ok) {
           this.notes = await response.json();
         } else {

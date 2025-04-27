@@ -1,28 +1,31 @@
 const Router = require('express').Router;
+const mongoose = require('mongoose');
 const Note = require('../models/notes'); // Importa o modelo Note
 
 const router = Router();
 
-// Rota para obter detalhes de uma nota
-router.get('/notes', async (req, res) => {
-    try {
-      const note = await Note.find({});
-  
-      if (!note) {
-        return res.status(404).json({ error: 'Sem notas registradas' });
-      }
-  
-      res.json(note);
-    } catch (error) {
-      console.error('Erro ao buscar nota:', error);
-      res.status(500).json({ error: 'Erro interno do servidor' });
-    }
-  });
+// Rota para listar todas as notas
+router.get('/', async (req, res) => {
+  try {
+    const notes = await Note.find({});
+    res.json(notes);
+  } catch (error) {
+    console.error('Erro ao buscar notas:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
 
 // Rota para obter detalhes de uma nota
 router.get('/:id', async (req, res) => {
   try {
-    const note = await Note.findById(req.params.id);
+    const { id } = req.params;
+
+    // Verifica se o ID é válido
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'ID inválido' });
+    }
+
+    const note = await Note.findById(id);
 
     if (!note) {
       return res.status(404).json({ error: 'Nota não encontrada' });
@@ -57,16 +60,22 @@ router.post('/', async (req, res) => {
 // Rota para editar uma nota
 router.put('/:id', async (req, res) => {
   try {
+    const { id } = req.params;
     const { title, description } = req.body;
+
+    // Verifica se o ID é válido
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'ID inválido' });
+    }
 
     if (!title || !description) {
       return res.status(400).json({ error: 'Título e descrição são obrigatórios' });
     }
 
     const note = await Note.findByIdAndUpdate(
-      req.params.id,
+      id,
       { title, description },
-      { new: true, runValidators: true } // Retorna o documento atualizado e valida os campos
+      { new: true, runValidators: true }
     );
 
     if (!note) {
@@ -83,7 +92,14 @@ router.put('/:id', async (req, res) => {
 // Rota para deletar uma nota
 router.delete('/:id', async (req, res) => {
   try {
-    const note = await Note.findByIdAndDelete(req.params.id);
+    const { id } = req.params;
+
+    // Verifica se o ID é válido
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'ID inválido' });
+    }
+
+    const note = await Note.findByIdAndDelete(id);
 
     if (!note) {
       return res.status(404).json({ error: 'Nota não encontrada' });
