@@ -14,12 +14,12 @@
         </thead>
         <tbody>
           <tr v-for="(note, index) in notes" :key="note._id">
-            <th scope="row">{{ index }}</th>
+            <td style="font-weight: bolder;">{{ index }}</td>
             <td class="title-column">
               <router-link :to="`/notes/${note._id}`">{{ note.title }}</router-link>
             </td>
             <td id="actions" class="actions-column">
-              <button @click="deleteNote(note._id)" class="btn btn-danger">Remover</button>
+              <button id="RemoveBtn" @click="deleteNote(note._id)" class="btn btn-danger">Remover</button>
             </td>
           </tr>
           <tr v-if="notes.length === 0">
@@ -37,11 +37,13 @@
 </template>
 
 <script>
+import { BASE_URL } from "../config.js"; // Importa a URL base do arquivo de configuração
 export default {
-  name: "Home",
+  name: "HomeView",
   data() {
     return {
       notes: [],
+      apiURL: BASE_URL
     };
   },
   created() {
@@ -50,7 +52,7 @@ export default {
   methods: {
     async fetchNotes() {
       try {
-        const response = await fetch("http://localhost:3000/notes");
+        const response = await fetch(`${this.apiURL}/notes`);
         if (response.ok) {
           this.notes = await response.json();
         } else {
@@ -63,7 +65,7 @@ export default {
     },
     async deleteNote(id) {
       try {
-        const response = await fetch("http://localhost:3000/notes/delete", {
+        const response = await fetch(`${this.apiURL}/delete`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -87,5 +89,53 @@ export default {
 </script>
 
 <style scoped>
-/* Adicione estilos específicos para este componente, se necessário */
+.table>:not(caption)>*>* {
+    background-color: var(--color-background-light);
+}
+
+table > thead{
+    border-bottom: 2px solid #212529a9;
+}
+
+tr > th{
+    text-align: left;
+}
+
+.title-column{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+    text-align: left;
+}
+
+th{
+    line-height: 3em;
+}
+
+td{
+  line-height: 46px;
+}
+
+.title-column a{
+    text-decoration: none;
+    color: #212529;
+    text-align: left;
+}
+
+.title-column a:hover{
+    text-decoration: underline;
+}
+
+#RemoveBtn{
+  margin: 7px;
+  display: block;
+}
+
+#mainViewNotes a.btn {
+    height: 40px;
+    margin-top: 6px;
+}
+
 </style>

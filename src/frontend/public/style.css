@@ -35,6 +35,10 @@ main#main-container{
     margin-bottom:20px;
 }
 
+.textarea-min-height {
+    min-height: 46vh;
+}
+
 footer{
     height: 35px;
     width: 100%;
@@ -72,50 +76,6 @@ main#mainViewNotes{
     max-height: 200px;
 } */
 
-.table>:not(caption)>*>* {
-    background-color: var(--color-background-light);
-}
-
-table > thead{
-    border-bottom: 2px solid #212529a9;
-}
-
-table > tbody > tr{
-    padding: 20px;
-}
-
-tr > th{
-    text-align: center;
-}
-
-.title-column{
-    width: 100%;
-    text-align: center;
-}
-
-th, td{
-    line-height: 3em;
-}
-
-.title-column a{
-    text-decoration: none;
-    color: #212529;
-}
-
-.title-column a:hover{
-    text-decoration: underline;
-}
-
-.actions-column{
-    display: flex;
-    gap: 15px;
-}
-
-#mainViewNotes a.btn {
-    height: 40px;
-    margin-top: 6px;
-}
-
 @media (600px > width){
     #mainViewNotes td{
         height: 70px;
@@ -124,8 +84,4 @@ th, td{
     #mainViewNotes .btn{
         height: 40px;
     }
-}
-
-#footer{
-    background-color: aqua;
 }

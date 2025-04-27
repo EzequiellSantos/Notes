@@ -1,10 +1,9 @@
-<!-- filepath: c:\Users\ezequ\OneDrive\Documentos\Estudos\Notes\frontend\src\views\CreateNote.vue -->
 <template>
   <div>
-    <router-link to="/">Voltar</router-link>
-    <h2>Adicione uma nota:</h2>
+    <router-link to="/"><p>Voltar</p></router-link>
+    <h2>Editar Nota:</h2>
 
-    <form @submit.prevent="createNote">
+    <form @submit.prevent="updateNote">
       <div class="mb-3">
         <label for="title" class="form-label">Título:</label>
         <input
@@ -19,32 +18,60 @@
         <textarea
           id="description"
           v-model="note.description"
-          class="form-control"
+          class="form-control textarea-min-height"
+          style="min-height: 46vh;"
           placeholder="Descreva melhor sua nota..."
         ></textarea>
       </div>
 
-      <button type="submit" class="btn btn-primary">Criar nota</button>
+      <button type="submit" class="btn btn-primary">Atualizar Nota</button>
     </form>
   </div>
 </template>
 
 <script>
+import { BASE_URL } from "../config.js"; // Importa a URL base da API
+
 export default {
-  name: "CreateNote",
+  name: "NoteView",
   data() {
     return {
       note: {
         title: "",
         description: "",
       },
+      apiURL: BASE_URL,
     };
   },
+  created() {
+    this.fetchNote();
+  },
   methods: {
-    async createNote() {
+    // Busca os dados da nota com base no ID da rota
+    async fetchNote() {
       try {
-        const response = await fetch("http://localhost:3000/notes", {
-          method: "POST",
+        const id = this.$route.params.id; // Obtém o ID da rota
+        const response = await fetch(`${this.apiURL}/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          this.note = {
+            title: data.title,
+            description: data.description,
+          };
+        } else {
+          alert("Erro ao carregar a nota.");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar a nota:", error);
+        alert("Erro ao buscar a nota.");
+      }
+    },
+    // Atualiza os dados da nota
+    async updateNote() {
+      try {
+        const id = this.$route.params.id; // Obtém o ID da rota
+        const response = await fetch(`${this.apiURL}/notes/${id}`, {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -52,14 +79,14 @@ export default {
         });
 
         if (response.ok) {
-          alert("Nota criada com sucesso!");
+          alert("Nota atualizada com sucesso!");
           this.$router.push("/"); // Redireciona para a página inicial
         } else {
-          alert("Erro ao criar a nota.");
+          alert("Erro ao atualizar a nota.");
         }
       } catch (error) {
-        console.error("Erro ao criar a nota:", error);
-        alert("Erro ao criar a nota.");
+        console.error("Erro ao atualizar a nota:", error);
+        alert("Erro ao atualizar a nota.");
       }
     },
   },
@@ -67,5 +94,14 @@ export default {
 </script>
 
 <style scoped>
-/* Adicione estilos específicos para este componente, se necessário */
+h2, .mb-3, p{
+  text-align: left;
+}
+label {
+  margin-top: 5px;
+}
+button{
+  display: block;
+  margin-right: auto
+}
 </style>

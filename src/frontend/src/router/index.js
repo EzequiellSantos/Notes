@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import Home from '../views/HomeView.vue';
 import CreateNote from '../views/CreateNote.vue';
 import Note from '../views/Note.vue';
-import store from '../store/index';
 
 const routes = [
   {
@@ -59,7 +58,7 @@ const router = createRouter({
   },
 });
 
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requireAuth)) {
     if (store.getters.authenticated === false) {
       next({
@@ -72,6 +71,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-});
+}); */
 
 export default router;

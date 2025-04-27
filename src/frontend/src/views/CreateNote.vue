@@ -1,7 +1,7 @@
 <!-- filepath: c:\Users\ezequ\OneDrive\Documentos\Estudos\Notes\frontend\src\views\CreateNote.vue -->
 <template>
   <div>
-    <router-link to="/">Voltar</router-link>
+    <router-link to="/"><p>Voltar</p></router-link>
     <h2>Adicione uma nota:</h2>
 
     <form @submit.prevent="createNote">
@@ -19,7 +19,8 @@
         <textarea
           id="description"
           v-model="note.description"
-          class="form-control"
+          class="form-control textarea-min-height"
+          style="min-height: 46vh;"
           placeholder="Descreva melhor sua nota..."
         ></textarea>
       </div>
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import { BASE_URL } from "../config.js"; // Importa a URL base do arquivo de configuração 
 export default {
   name: "CreateNote",
   data() {
@@ -37,13 +39,14 @@ export default {
       note: {
         title: "",
         description: "",
+        apiURL: BASE_URL,
       },
     };
   },
   methods: {
     async createNote() {
       try {
-        const response = await fetch("http://localhost:3000/notes", {
+        const response = await fetch(`${this.apiURL}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -67,5 +70,14 @@ export default {
 </script>
 
 <style scoped>
-/* Adicione estilos específicos para este componente, se necessário */
+h2, .mb-3, p{
+  text-align: left;
+}
+label {
+  margin-top: 5px;
+}
+button {
+  display: block;
+  margin-right: auto
+}
 </style>
