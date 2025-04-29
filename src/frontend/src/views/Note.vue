@@ -70,7 +70,7 @@ export default {
     async updateNote() {
       try {
         const id = this.$route.params.id; // Obtém o ID da rota
-        const response = await fetch(`${this.apiURL}/notes/${id}`, {
+        const response = await fetch(`${this.apiURL}/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -79,7 +79,6 @@ export default {
         });
 
         if (response.ok) {
-          alert("Nota atualizada com sucesso!");
           this.$router.push("/"); // Redireciona para a página inicial
         } else {
           alert("Erro ao atualizar a nota.");

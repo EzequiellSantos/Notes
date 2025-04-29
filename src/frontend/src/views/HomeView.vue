@@ -65,16 +65,14 @@ export default {
     },
     async deleteNote(id) {
       try {
-        const response = await fetch(`${this.apiURL}/delete`, {
-          method: "POST",
+        const response = await fetch(`${this.apiURL}/${id}`, {
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id }),
+          }
         });
 
         if (response.ok) {
-          alert("Nota removida com sucesso!");
           this.fetchNotes(); // Atualiza a lista de notas
         } else {
           alert("Erro ao remover a nota.");
